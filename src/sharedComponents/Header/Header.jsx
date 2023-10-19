@@ -1,7 +1,16 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png'
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const Header = () => {
+
+  const {user, logOut} = useContext(AuthContext)
+
+  const handleLogOut = () => {
+    logOut()
+  }
+
   return (
     <div className='xl:mx-[5%] lg:mx-5 mx-[5%] flex flex-wrap justify-between items-center py-6'>
       
@@ -16,12 +25,16 @@ const Header = () => {
         <NavLink to={'/'}>Home</NavLink>
         <NavLink to={'/addProduct'}>Add Product</NavLink>
         <NavLink to={'/cart'}>My Cart</NavLink>
-        <Link to={'/login'}><button>Login</button></Link>
+        
+        {
+          user ? <button onClick={handleLogOut}>Log Out</button> : <Link to={'/login'}><button>Login</button></Link>
+        }
       </div>
 
       <div className='sm:w-[300px] w-full text-right lg:order-3'>
         <form>
             <input type="text" placeholder='Search Products' className='border text-2xl pl-4 border-gray-500 bg-[#00000000] outline-0 w-full h-14 rounded-md' />
+
         </form>
       </div>
     </div>
