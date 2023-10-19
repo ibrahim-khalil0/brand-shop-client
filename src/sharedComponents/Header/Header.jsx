@@ -4,8 +4,8 @@ import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProviders';
 
 const Header = () => {
-
   const {user, logOut} = useContext(AuthContext)
+  console.log(user)
 
   const handleLogOut = () => {
     logOut()
@@ -27,7 +27,17 @@ const Header = () => {
         <NavLink to={'/cart'}>My Cart</NavLink>
         
         {
-          user ? <button onClick={handleLogOut}>Log Out</button> : <Link to={'/login'}><button>Login</button></Link>
+          user ? <button className='relative account-container'>
+            Account
+            <div className='absolute rounded-md bg-white px-5 space-y-6 py-8 text-black top-6 account hidden text-left z-30 w-[350px]'>
+              <img src={user.photoURL} alt="" className='rounded-full w-16' />
+              <h3>{user.displayName}</h3>
+              <h3>{user.email}</h3>
+              <button onClick={handleLogOut} className='border border-black px-4 py-2 rounded-md'>Log Out</button>
+            </div>
+            </button>
+           : 
+           <Link to={'/login'}><button>Login</button></Link>
         }
       </div>
 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
 
@@ -7,6 +7,7 @@ const Login = () => {
     const {signInUser, signInWithGoogle} = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
+    const [error, setError] = useState(null)
 
     const handleLogin = e => {
         e.preventDefault();
@@ -21,6 +22,7 @@ const Login = () => {
         })
         .catch( error => {
             console.error(error)
+            setError('Invalid Email Or Password')
         })
     }
 
@@ -47,9 +49,13 @@ const Login = () => {
                         
                         <input type="submit" value="Login" className='border border-white bg-[#00000000] w-full rounded-md text-2xl px-4 py-2 text-white cursor-pointer' />
                     </form>
+                    {
+                        error && <h1 className='text-red-800 text-2xl'>{error}</h1>
+                    }
                     <h1 className='text-xl py-5'>Don't have an account? <Link to={'/register'}><span className='text-white'>Register</span></Link></h1>
                     <h1 className='text-xl'>Or</h1>
                     <button onClick={handleGoogleLogin} className='border-[1px] relative border-white rounded-md text-xl w-full py-2 my-5 '>Login With Google</button>
+                    
                 </div>
             </div>
         </div>

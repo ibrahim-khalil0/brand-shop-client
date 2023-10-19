@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import background from '../../assets/hp.png'
 import { AuthContext } from '../../Providers/AuthProviders';
 
 const Register = () => {
 
     const navigate = useNavigate()
+    const [error, setError] = useState(null)
 
     const {createNewUser, signInWithGoogle} = useContext(AuthContext)
     const handleRegister = e => {
@@ -13,10 +13,22 @@ const Register = () => {
         const form = new FormData(e.currentTarget)
         const email = form.get('email')
         const password = form.get('password')
+        const name = form.get('name')
+        const photo = form.get('photo')
+
+        if(!/^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*\d).{6,}$/.test(password)){
+            setError('Password will be minimum 6 character, one Uppercase letter, one special character and one number')
+            return
+        }
 
         createNewUser(email, password)
         .then( result => {
-            console.log(result.user)
+
+            updateProfile(result.user, {
+                displayName: name,
+                photoURL: photo
+            })
+
             navigate(location?.state ? location.state : '/')
 
         })
@@ -57,6 +69,9 @@ const Register = () => {
                         <br></br>
                         <input type="submit" name="" id="" className='border border-white bg-[#00000000] w-full rounded-md text-2xl px-4 py-2 text-white cursor-pointer' />
                     </form>
+                    {
+                        error && <h3 className='text-red-700'>{error}</h3>
+                    }
                     <h1 className='text-xl py-5'>Already have an account? <Link to={'/login'}><span className='text-white'>Login</span></Link></h1>
                     <h1 className='text-xl'>Or</h1>
                     <button onClick={handleGoogleLogin} className='border-[1px] relative border-white rounded-md text-xl w-full py-2 my-5 '>Login With Google</button>
