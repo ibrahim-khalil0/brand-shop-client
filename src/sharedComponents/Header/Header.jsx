@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 
 const Header = () => {
@@ -16,7 +16,7 @@ const Header = () => {
         <NavLink to={'/'}>Home</NavLink>
         <NavLink to={'/addProduct'}>Add Product</NavLink>
         <NavLink to={'/cart'}>My Cart</NavLink>
-        <button>Login</button>
+        <Link to={'/login'}><button>Login</button></Link>
       </div>
 
       <div className='sm:w-[300px] w-full text-right lg:order-3'>
