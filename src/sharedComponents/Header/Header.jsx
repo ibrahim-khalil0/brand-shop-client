@@ -5,7 +5,6 @@ import { AuthContext } from '../../Providers/AuthProviders';
 
 const Header = () => {
   const {user, logOut} = useContext(AuthContext)
-  console.log(user)
 
   const handleLogOut = () => {
     logOut()
@@ -27,7 +26,7 @@ const Header = () => {
         <NavLink to={'/cart'}>My Cart</NavLink>
         
         {
-          user ? <button className='relative account-container'>
+          user ? <span className='relative account-container inline-block'>
             Account
             <div className='absolute rounded-md bg-white px-5 space-y-6 py-8 text-black top-6 account hidden text-left z-30 w-[350px]'>
               <img src={user.photoURL} alt="" className='rounded-full w-16' />
@@ -35,7 +34,7 @@ const Header = () => {
               <h3>{user.email}</h3>
               <button onClick={handleLogOut} className='border border-black px-4 py-2 rounded-md'>Log Out</button>
             </div>
-            </button>
+            </span>
            : 
            <Link to={'/login'}><button>Login</button></Link>
         }
