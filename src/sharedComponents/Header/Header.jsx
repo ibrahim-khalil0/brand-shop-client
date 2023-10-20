@@ -27,7 +27,7 @@ const Header = () => {
         
         {
           user ? <span className='relative account-container inline-block'>
-            Account
+            My Account
             <div className='absolute rounded-md bg-white px-5 space-y-6 py-8 text-black top-6 account hidden text-left z-30 w-[350px]'>
               <img src={user.photoURL} alt="" className='rounded-full w-16' />
               <h3>{user.displayName}</h3>
