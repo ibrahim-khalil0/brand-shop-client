@@ -10,7 +10,7 @@ const Brands = () => {
         <div>
            {
             products.length ? 
-            <div className='grid grid-cols-4 px-[10%] py-24 gap-6 bg-[#202020]'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-[10%] py-24 gap-6 bg-[#202020]'>
                 {
                     products.map((product, idx) => <Product key={product._id} idx={idx} product={product}></Product>)
                 }

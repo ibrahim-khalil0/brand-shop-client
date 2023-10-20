@@ -1,4 +1,5 @@
-
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const AddProduct = () => {
 
@@ -34,19 +35,20 @@ const AddProduct = () => {
     .then(res => res.json())
     .then(data => {
       console.log(data)
+      toast('Product Added Successfully')
     })
     form.reset()
 
   }
   return (
     <div>
-      <div className="w-3/4 border-2 border-gray-300 mx-auto mt-16 mb-10 text-center py-10 px-16 rounded-md">
+      <div className="w-3/4 border-2 border-gray-300 mx-auto mt-16 mb-10 text-center py-10 px-4 md:px-16 rounded-md">
         <h1 className="text-center text-6xl mb-8 text-[#fff] ">
           Add New Product
         </h1>
         <div>
           <form onSubmit={handleAddProduct} className="product-form space-y-8">
-            <div className="flex gap-8">
+            <div className="flex gap-8 flex-col lg:flex-row">
               <input
                 type="text"
                 name="name"
@@ -61,7 +63,7 @@ const AddProduct = () => {
               />
             </div>
 
-            <div className="flex gap-8">
+            <div className="flex gap-8 flex-col lg:flex-row">
               <input
                 type="text"
                 name="brand"
@@ -76,7 +78,7 @@ const AddProduct = () => {
               />
             </div>
 
-            <div className="flex gap-8">
+            <div className="flex gap-8 flex-col lg:flex-row">
               <input
                 type="text"
                 name="price"
@@ -101,6 +103,7 @@ const AddProduct = () => {
           </form>
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

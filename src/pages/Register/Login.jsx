@@ -38,7 +38,7 @@ const Login = () => {
 
     return (
         <div style={{backgroundImage: `url(https://t3.ftcdn.net/jpg/03/70/92/84/360_F_370928450_R6g8c0j5cey86PUXE32W7KMiqIUe1fOI.jpg)`}} className='bg-no-repeat bg-cover bg-center py-24'>
-            <div className='w-2/4 mx-auto mt-16 mb-10 text-center py-10 px-16 rounded-md backdrop-blur-sm bg-white/30 backdrop-brightness-50'>
+            <div className='w-3/4 lg:w-2/4 mx-auto mt-16 mb-10 text-center py-10 sm:px-8 px-4 lg:px-16 rounded-md backdrop-blur-sm bg-white/30 backdrop-brightness-50'>
                 <h1 className='text-center text-6xl mb-8'>Login</h1>
                 <div>
                     <form onSubmit={handleLogin}>

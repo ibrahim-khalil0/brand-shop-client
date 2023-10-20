@@ -2,6 +2,8 @@ import { useLoaderData, useParams } from "react-router-dom";
 import Rating from "../../sharedComponents/Rating/Rating";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetails = () => {
     const {productId} = useParams()
@@ -23,13 +25,14 @@ const ProductDetails = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            toast('Product Added in Your Cart')
         })
     }
     
     const {brand, category, description, photo, price, rating, tittle} = product
     return (
-        <div className="bg-[#202020] px-[10%] py-24 flex">
-            <div className="flex-1 bg-[#000000] px-16 py-20 rounded-sm flex">
+        <div className="bg-[#202020] px-[10%] py-24 flex flex-col md:flex-row">
+            <div className="flex-1 bg-[#000000] px-16 py-20 rounded-sm flex h-screen">
                 <img src={photo} alt="" className="w-full"/>
             </div>
             <div className="flex-1 pl-10 space-y-6">
@@ -54,7 +57,7 @@ const ProductDetails = () => {
                     <p className="text-md mt-4">{description}</p>
                 </div>
             </div>
-            
+            <ToastContainer />
         </div>
     );
 };
