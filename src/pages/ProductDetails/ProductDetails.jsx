@@ -1,9 +1,30 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import Rating from "../../sharedComponents/Rating/Rating";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProviders";
 
 const ProductDetails = () => {
     const {productId} = useParams()
     const product = useLoaderData()
+
+    const {user} = useContext(AuthContext)
+
+    const handleCart = () => {
+        const userId = user.uid
+        product.user = userId
+
+        fetch('http://localhost:5000/cart', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
     
     const {brand, category, description, photo, price, rating, tittle} = product
     return (
@@ -24,7 +45,7 @@ const ProductDetails = () => {
                     <h5>{rating} Star Rating</h5>
                 </div>
                 <h4 className="text-3xl">Price : ${price}</h4>
-                <button className="bg-white text-black text-xl px-5 py-2 rounded-md font-semibold">Add To Cart</button>
+                <button onClick={handleCart} className="bg-white text-black text-xl px-5 py-2 rounded-md font-semibold">Add To Cart</button>
                 <div className="pt-8 pb-4">
                     <hr/>
                 </div>

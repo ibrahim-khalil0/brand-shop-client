@@ -5,9 +5,9 @@ const UpdateProduct = () => {
 
     const product = useLoaderData()
     
-    const {brand, category, description, photo, price, rating, tittle} = product
+    const {brand, category, description, photo, price, rating, tittle, _id} = product
 
-    const handleAddProduct = e => {
+    const handleUpdateProduct = e => {
         e.preventDefault()
         const form = e.target
     
@@ -21,12 +21,26 @@ const UpdateProduct = () => {
         const rating = form.rating.value
         const description = form.description.value
     
-        const newProduct = {tittle, photo, brand, category, price, rating, description}
+        const updateProduct = {tittle, photo, brand, category, price, rating, description}
     
         if(isNaN(price)){
           alert('Invalid Price')
           return
         }
+
+        fetch(`http://localhost:5000/products/${_id}`, {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(updateProduct)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+        })
+
+
     }
 
     return (
@@ -36,7 +50,7 @@ const UpdateProduct = () => {
           Update Product
         </h1>
         <div>
-          <form onSubmit={handleAddProduct} className="product-form space-y-8">
+          <form onSubmit={handleUpdateProduct} className="product-form space-y-8">
             <div className="flex gap-8">
               <input
                 type="text"
@@ -58,12 +72,14 @@ const UpdateProduct = () => {
               <input
                 type="text"
                 name="brand"
+                defaultValue={brand}
                 required
                 placeholder="Brand Name"
               />
               <input
                 type="text"
                 name="category"
+                defaultValue={category}
                 required
                 placeholder="Category Name"
               />
@@ -73,22 +89,24 @@ const UpdateProduct = () => {
               <input
                 type="text"
                 name="price"
+                defaultValue={price}
                 required
                 placeholder="Product Price"
               />
               <input
                 type="number"
                 name="rating"
+                defaultValue={rating}
                 required
                 placeholder="Product Rating"
                 max="5"
               />
             </div>
-            <textarea name="description" className="w-full bg-black border border-white rounded-md text-xl px-4 py-3" rows="5" placeholder="Product Description..."></textarea>
+            <textarea name="description" defaultValue={description} className="w-full bg-black border border-white rounded-md text-xl px-4 py-3" rows="5" placeholder="Product Description..."></textarea>
 
             <input
               type="submit"
-              value="Add Product"
+              value="Update Product"
               className="bg-[#EDB602] w-full rounded-md text-2xl px-4 py-2 text-white cursor-pointer"
             />
           </form>

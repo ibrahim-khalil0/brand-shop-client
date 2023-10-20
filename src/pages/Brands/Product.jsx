@@ -9,7 +9,7 @@ const Product = ({product, idx}) => {
 
     return (
         <div className="shadow-xl shadow-[#0000003d] hover:shadow-lg hover:shadow-black relative hover:bottom-4">
-            <div className="bg-black px-5 rounded-md relative">
+            <div className="bg-black px-5 py-2 rounded-md relative">
                 <img src={photo} alt="" className="w-full h-[230px]" />
                 <span className="absolute top-0 right-0 bg-white text-black px-4 rounded-b-sm pb-1 font-semibold">{category}</span>
             </div>
