@@ -5,7 +5,6 @@ import { AuthContext } from '../../Providers/AuthProviders';
 
 const Header = () => {
   const {user, logOut} = useContext(AuthContext)
-
   const handleLogOut = () => {
     logOut()
   }
@@ -23,7 +22,9 @@ const Header = () => {
       <div className='w-full lg:flex-1 text-center space-x-5 sm:space-x-10 text-xl order-3 pt-3 mt-3 lg:pt-0 sm:border-t lg:border-0 border-gray-400'>
         <NavLink to={'/'}>Home</NavLink>
         <NavLink to={'/addProduct'}>Add Product</NavLink>
-        <NavLink to={`/cart/${user.uid}`}>My Cart</NavLink>
+        {
+          user ? <NavLink to={`/cart/${user.uid}`}>My Cart</NavLink> : <NavLink to={`/login`}>My Cart</NavLink>
+        }
         
         {
           user ? <span className='relative account-container inline-block'>

@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
 
 const Register = () => {
 
     const navigate = useNavigate()
     const [error, setError] = useState(null)
+    const location = useLocation()
+    console.log(location)
 
     const {createNewUser, signInWithGoogle} = useContext(AuthContext)
     const handleRegister = e => {

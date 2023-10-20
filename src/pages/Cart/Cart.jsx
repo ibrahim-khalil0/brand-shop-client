@@ -7,15 +7,17 @@ const Cart = () => {
     const products = useLoaderData()
     console.log(products)
     return (
-        <div className='h-full'>
+        <div className='py-44 bg-[#202020]'>
             {
-                products.length ? <div className='bg-[#202020] px-[10%]'>
+                products.length ? <div className='px-[10%] grid grid-cols-2 gap-6'>
                     {
                         products.map(product => <CartProduct key={product._id} product={product}></CartProduct>)
                     }
                 </div>
                 :
-                <div></div>
+                <div>
+                    <h1 className='text-center text-5xl my-12'>You Have Not Any Product In Cart</h1>
+                </div>
             }
         </div>
     );
