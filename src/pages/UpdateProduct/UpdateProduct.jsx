@@ -1,48 +1,39 @@
+import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
+const UpdateProduct = () => {
 
-const AddProduct = () => {
-
-  const handleAddProduct = e => {
-    e.preventDefault()
-    const form = e.target
-
-    const tittle = form.name.value
-    const photo = form.photo.value
-    const brandName = form.brand.value
-    const brand = brandName.toLowerCase()
-    const category = form.category.value
-    const priceString = form.price.value
-    const price = parseInt(priceString)
-    const rating = form.rating.value
-    const description = form.description.value
-
-    const newProduct = {tittle, photo, brand, category, price, rating, description}
-
-    if(isNaN(price)){
-      alert('Invalid Price')
-      return
-    }
+    const product = useLoaderData()
     
+    const {brand, category, description, photo, price, rating, tittle} = product
 
-    fetch('http://localhost:5000/products', {
-      method: 'POST',
-      headers: {
-        "content-type":"application/json"
-      },
-      body: JSON.stringify(newProduct)
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-    })
-    form.reset()
+    const handleAddProduct = e => {
+        e.preventDefault()
+        const form = e.target
+    
+        const tittle = form.name.value
+        const photo = form.photo.value
+        const brandName = form.brand.value
+        const brand = brandName.toLowerCase()
+        const category = form.category.value
+        const priceString = form.price.value
+        const price = parseInt(priceString)
+        const rating = form.rating.value
+        const description = form.description.value
+    
+        const newProduct = {tittle, photo, brand, category, price, rating, description}
+    
+        if(isNaN(price)){
+          alert('Invalid Price')
+          return
+        }
+    }
 
-  }
-  return (
-    <div>
-      <div className="w-3/4 border-2 border-gray-300 mx-auto mt-16 mb-10 text-center py-10 px-16 rounded-md">
+    return (
+        <div>
+            <div className="w-3/4 border-2 border-gray-300 mx-auto mt-16 mb-10 text-center py-10 px-16 rounded-md">
         <h1 className="text-center text-6xl mb-8 text-[#fff] ">
-          Add New Product
+          Update Product
         </h1>
         <div>
           <form onSubmit={handleAddProduct} className="product-form space-y-8">
@@ -51,12 +42,14 @@ const AddProduct = () => {
                 type="text"
                 name="name"
                 placeholder="Product Name"
+                defaultValue={tittle}
                 required
               />
               <input
                 type="text"
                 name="photo"
                 placeholder="Product URL"
+                defaultValue={photo}
                 required
               />
             </div>
@@ -101,8 +94,8 @@ const AddProduct = () => {
           </form>
         </div>
       </div>
-    </div>
-  );
+        </div>
+    );
 };
 
-export default AddProduct;
+export default UpdateProduct;

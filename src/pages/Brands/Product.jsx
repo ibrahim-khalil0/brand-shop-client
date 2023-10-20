@@ -20,7 +20,7 @@ const Product = ({product, idx}) => {
                 <Rating rating={rating} id={idx}></Rating>
                 <div className="flex gap-6">
                     <Link to={`/product/${brand}/${_id}`} className="bg-white flex-1 text-black text-xl font-semibold py-1 rounded-lg"><button>Details</button></Link>
-                    <Link to={'/'} className="border flex-1 border-white py-1 rounded-lg"><button>Update</button></Link>
+                    <Link to={`/update/${brand}/${_id}`} className="border flex-1 border-white py-1 rounded-lg"><button>Update</button></Link>
                 </div>
             </div>
         </div>
