@@ -1,5 +1,6 @@
 
 import { useLoaderData, useParams } from 'react-router-dom';
+import Product from './Product';
 
 const Brands = () => {
 
@@ -8,9 +9,16 @@ const Brands = () => {
     const {brand_name} = useParams()
     return (
         <div>
-           <h1>brand</h1> 
-           <h3>{brand_name}</h3>
-           <h3>{products.length}</h3>
+           {
+            products.length ? 
+            <div className='grid grid-cols-4 px-[10%] py-24 gap-6 bg-[#202020]'>
+                {
+                    products.map(product => <Product key={product._id} product={product}></Product>)
+                }
+            </div> 
+            : 
+            <div>0</div>
+           }
         </div>
     );
 };

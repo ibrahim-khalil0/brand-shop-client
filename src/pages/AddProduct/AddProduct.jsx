@@ -1,20 +1,31 @@
+import { useState } from "react";
+
 const AddProduct = () => {
 
+  const [error, setError] = useState()
   const handleAddProduct = e => {
     e.preventDefault()
     const form = e.target
 
     const tittle = form.name.value
     const photo = form.photo.value
-    const brand = form.brand.value
+    const brandName = form.brand.value
+    const brand = brandName.toLowerCase()
     const category = form.category.value
-    const price = form.price.value
+    const priceString = form.price.value
+    const price = parseInt(priceString)
     const rating = form.rating.value
     const description = form.description.value
 
     const newProduct = {tittle, photo, brand, category, price, rating, description}
 
-    fetch('http://localhost:5000/products/:brand_name', {
+    if(isNaN(price)){
+      alert('Invalid Price')
+      return
+    }
+    
+
+    fetch('http://localhost:5000/products', {
       method: 'POST',
       headers: {
         "content-type":"application/json"
