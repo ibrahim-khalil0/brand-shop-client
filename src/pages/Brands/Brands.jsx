@@ -5,7 +5,6 @@ import Product from './Product';
 const Brands = () => {
 
     const products = useLoaderData()
-    console.log(products)
     const {brand_name} = useParams()
     return (
         <div>
@@ -13,11 +12,14 @@ const Brands = () => {
             products.length ? 
             <div className='grid grid-cols-4 px-[10%] py-24 gap-6 bg-[#202020]'>
                 {
-                    products.map(product => <Product key={product._id} product={product}></Product>)
+                    products.map((product, idx) => <Product key={product._id} idx={idx} product={product}></Product>)
                 }
             </div> 
             : 
-            <div>0</div>
+            
+            <div className='grid h-[500px] place-items-center bg-[#202020]'>
+                <h3 className='text-5xl'>{brand_name}'s Products Not Found</h3>
+            </div>
            }
         </div>
     );
