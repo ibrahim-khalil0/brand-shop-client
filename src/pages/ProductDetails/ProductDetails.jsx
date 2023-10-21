@@ -24,7 +24,6 @@ const ProductDetails = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             toast('Product Added in Your Cart')
         })
     }

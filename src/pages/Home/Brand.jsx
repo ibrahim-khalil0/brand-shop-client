@@ -3,7 +3,7 @@ import apple from "../../assets/apple_watch.jpg";
 
 const Brand = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-[10%] text-center text-4xl my-24">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-[10%] text-center text-4xl">
       <Link to={"/brand/apple"}>
         <div className="brand-category">
           <div className="relative">
@@ -60,7 +60,7 @@ const Brand = () => {
         </div>
       </Link>
 
-      <Link to={"/brand/:walton"}>
+      <Link to={"/brand/walton"}>
         <div className="brand-category">
           <div className="relative">
             <img

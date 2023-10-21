@@ -1,17 +1,34 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import CartProduct from './CartProduct';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const Cart = () => {
 
-    const products = useLoaderData()
-    console.log(products)
+    const [products, setProducts] = useState([])
+
+    const {user, loading,  setLoading} = useContext(AuthContext)
+    const userId = user.uid
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/cart/${userId}`)
+        .then(res => res.json())
+        .then(data => {
+            setProducts(data)
+            
+        })
+        setLoading(false)
+
+    }, [])
+
     return (
         <div className='py-44 bg-[#202020]'>
             {
+                loading && <h3>Loading...</h3> 
+            }
+            {
                 products.length ? <div className='px-[10%] grid grid-cols-1 lg:grid-cols-2 gap-6'>
                     {
-                        products.map(product => <CartProduct key={product._id} product={product}></CartProduct>)
+                        products.map(product => <CartProduct key={product._id} product={product} products={products} setProducts={setProducts}></CartProduct>)
                     }
                 </div>
                 :

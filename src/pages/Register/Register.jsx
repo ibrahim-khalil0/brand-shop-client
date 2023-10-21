@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
+import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
 
     const navigate = useNavigate()
     const [error, setError] = useState(null)
     const location = useLocation()
-    console.log(location)
 
     const {createNewUser, signInWithGoogle} = useContext(AuthContext)
     const handleRegister = e => {
@@ -30,7 +30,6 @@ const Register = () => {
                 displayName: name,
                 photoURL: photo
             })
-
             navigate(location?.state ? location.state : '/')
 
         })
@@ -48,6 +47,7 @@ const Register = () => {
         .catch( error => {
             console.error(error)
         })
+        
     }
     return (
         <div style={{backgroundImage: `url(https://t3.ftcdn.net/jpg/03/70/92/84/360_F_370928450_R6g8c0j5cey86PUXE32W7KMiqIUe1fOI.jpg)`}} className='bg-no-repeat bg-cover bg-center py-24'>

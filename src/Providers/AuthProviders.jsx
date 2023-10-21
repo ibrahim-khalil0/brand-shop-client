@@ -40,6 +40,7 @@ const AuthProviders = ({children}) => {
 
     const authDetails = {
         loading,
+        setLoading,
         createNewUser,
         signInUser,
         signInWithGoogle,

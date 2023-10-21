@@ -22,16 +22,14 @@ const Header = () => {
       <div className='w-full lg:flex-1 text-center space-x-5 sm:space-x-10 text-xl order-3 pt-3 mt-3 lg:pt-0 sm:border-t lg:border-0 border-gray-400'>
         <NavLink to={'/'}>Home</NavLink>
         <NavLink to={'/addProduct'}>Add Product</NavLink>
-        {
-          user ? <NavLink to={`/cart/${user.uid}`}>My Cart</NavLink> : <NavLink to={`/login`}>My Cart</NavLink>
-        }
+        <NavLink to={'/cart'}>My Cart</NavLink>
         
         {
           user ? <span className='relative account-container inline-block'>
             My Account
             <div className='absolute rounded-md bg-white px-5 space-y-6 py-8 text-black top-6 account hidden text-left z-30 w-[350px]'>
-              <img src={user.photoURL} alt="" className='rounded-full w-16' />
-              <h3>{user.displayName}</h3>
+              <img src={user?.photoURL} alt="" className='rounded-full w-16' />
+              <h3>{user?.displayName}</h3>
               <h3>{user.email}</h3>
               <button onClick={handleLogOut} className='border border-black px-4 py-2 rounded-md'>Log Out</button>
             </div>

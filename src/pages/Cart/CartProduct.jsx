@@ -1,18 +1,25 @@
 
 
-const handleRemoveProduct = (id) => {
-    console.log(id)
-    fetch(`http://localhost:5000/cart/${id}`, {
-        method: 'DELETE'
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-    })
-}
-
-const CartProduct = ({product}) => {
+const CartProduct = ({product, products, setProducts}) => {
     const {tittle, photo, price, _id} = product
+
+
+    const handleRemoveProduct = (id) => {
+
+    
+        console.log(id)
+        fetch(`http://localhost:5000/cart/${id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            const remainingProduct = products.filter(product => product._id !== id)
+            setProducts(remainingProduct)
+        })
+    }
+
+
     return (
         <div className='flex bg-[#000000] px-5 py-8 rounded-lg'>
             <div className='w-1/6'>
