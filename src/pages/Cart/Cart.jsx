@@ -10,7 +10,7 @@ const Cart = () => {
     const userId = user.uid
 
     useEffect(() => {
-        fetch(`http://localhost:5000/cart/${userId}`)
+        fetch(`https://brand-shop-server-7sdp3kfz7-md-ibrahim-khalils-projects.vercel.app/cart/${userId}`)
         .then(res => res.json())
         .then(data => {
             setProducts(data)
